@@ -44,7 +44,6 @@ def urlSoup(u):
     image_url.append(urlImg)
     product_description.append(descriptionBook)
 
-"""
 for li in soup.find("ul", class_="nav-list").ul.find_all("li"):
     a = li.a.get("href")
     url = "https://books.toscrape.com/" + a
@@ -68,7 +67,7 @@ for li in soup.find("ul", class_="nav-list").ul.find_all("li"):
                     urlNextBook = h3.a.get("href").strip("../")
                     url = "https://books.toscrape.com/catalogue/" + urlNextBook
                     urlSoup(url)
-"""
+
 for i in tqdm(title, desc= "All the books"):
     time.sleep(0.1)  
 
