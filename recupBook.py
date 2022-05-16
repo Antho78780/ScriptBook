@@ -2,18 +2,16 @@ import csv
 import os
 import time
 import urllib.request
-
 import requests
 from bs4 import BeautifulSoup
 from tqdm import tqdm
-
 
 FILE_PATH = "images/"
 if not os.path.exists(FILE_PATH):
     os.mkdir(FILE_PATH)
 
-url = "https://books.toscrape.com/"
-page = requests.get(url)
+urlAccueil = "https://books.toscrape.com/"
+page = requests.get(urlAccueil)
 soup = BeautifulSoup(page.content, "html.parser")
 
 title = []
@@ -37,11 +35,11 @@ def urlSoup(u):
     soupPage = BeautifulSoup(pageUrl.content, "html.parser")
 
     img = soupPage.img.get("src").lstrip("../")
-    urlImg = "https://books.toscrape.com/" + img
+    urlImg = urlAccueil + img
     descriptionBook = soupPage.find("article", class_="product_page").find_all("p")[3].get_text().strip()
     categoryBook = soupPage.find("ul", class_="breadcrumb").find_all("li")[2].a.get_text()
     td = soupPage.find_all("td")
-    title.append(soupPage.find("h1").get_text())
+    title.append(soupPage.h1.get_text())
     category.append(categoryBook)
     number_available.append(td[5].get_text())
     price_including_max.append(td[2].get_text())
@@ -55,35 +53,39 @@ def urlSoup(u):
 
 for li in soup.find("ul", class_="nav-list").ul.find_all("li"):
     a = li.a.get("href")
-    url = "https://books.toscrape.com/" + a
+    url = urlAccueil + a
     page = requests.get(url)
     soup = BeautifulSoup(page.content, "html.parser")
     allh3 = soup.find_all("h3")
     for h3 in allh3:
         urlBook = h3.a.get("href").strip("../")
-        url = "https://books.toscrape.com/catalogue/" + urlBook
+        url = urlAccueil + "catalogue/" + urlBook
         urlSoup(url)
 
     next = soup.find("li", class_="next")
-    if next:
-        for i in range(2, 9):
-            url = "https://books.toscrape.com/" + a.strip("index.html") + "page-" + str(i) + ".html"
-            page = requests.get(url)
-            if page:
+    currentPage = soup.find("li", class_="current")
+    
+    if next and currentPage:
+        currentPage = soup.find("li", class_="current").get_text().strip()[-2:].strip()
+        
+        for i in range(int(currentPage) + 1):
+            if i > 1:
+                url = "https://books.toscrape.com/" + a.strip("index.html") + "page-{}".format(i) + ".html"
+                page = requests.get(url)
                 soup = BeautifulSoup(page.content, "html.parser")
                 allh3 = soup.find_all("h3")
                 for h3 in allh3:
                     urlNextBook = h3.a.get("href").strip("../")
-                    url = "https://books.toscrape.com/catalogue/" + urlNextBook
+                    url = urlAccueil + "catalogue/" + urlNextBook
                     urlSoup(url)
-
-for i in tqdm(title, desc="All the books"):
-    time.sleep(0.1)  
 
 for i in range(len(image_url)):
     FILENAME = "image-{}".format(i) + ".jpg"
     FULL_PATH = FILE_PATH + FILENAME
     urllib.request.urlretrieve(image_url[i], FULL_PATH)
+
+for i in tqdm(title, desc="All the books"):
+    time.sleep(0.1)
 
 with open("data.csv", "w", encoding="utf-8") as csvFile:
     w = csv.writer(csvFile, delimiter=",")
