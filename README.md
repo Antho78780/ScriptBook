@@ -27,5 +27,5 @@ Lancement du script:
 *** python recupBook.py ***
 
 Attendre envion 10 minutes
-si une barre de chargement apparait, le script à bien été exécuté
+si une barre de chargement parfait, le script à bien été exécuté
 
