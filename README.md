@@ -1,38 +1,35 @@
-***Infos script***
-Le script permet de récupérer toute les informations
-de tout les livres de chaque catégory et de chaque page
-pour les mettre dans un fichier csv.
+# Script information
 
-***Installation pour exécuter le script***
+The script allows you to retrieve all the information
+of all the books of each category and each page
+at https://books.toscrape.com/
+It also allows you to download all the images from
+each book.
 
-Installer python 3.9.12 sur çe site : 
-https://www.python.org/ 
+## Setup
 
-Quand vous installez python cocher l'option
-*** add path python ***
+Install python 3.9.12 on this site:
+https://www.python.org/
 
-ça va permettre d'ajouter la variable d'environnent au pc.
+When you install python check the option
+add path python
 
-les 3 options qui sont à la suite sont à réaliser que si vous voulez avoir un environnement virtuel
+If you are not using pycharm
+python -m venv env 
+env/scripts/activate 
+pip install -r requirements.txt
 
-Si vous n'utilisez pas pycharm
+If you are using pycharm
+Click on the bottom right of pycharm on your programming language and press add interpretter
+Click on New environment and press ok
 
-*** python -m venv env *** "Pour installer votre environnement virtuel"
-*** env/scripts/activate *** "pour activez votre environnement virtuel"
-*** pip install -r requirements.txt *** "Pour installez touts les packages qui sont dans le fichier requirements.txt"
-***deactivate*** pour desactiver votre environnement virtuel
+venv/scripts/activate
+pip install -r requirements.txt
 
-Si vous utilisez pycharm
+## Usage
+python recupBook.py 
 
-Cliquez en bas à droite de pycharm sur votre language de programmation et appuyez sur add interpretter
-Cliquez sur New environnement et appuyez sur ok
-*** venv/scripts/activate*** "Pour activer votre environnement virtuel"
-*** pip install -r requirements.txt*** "Pour installez touts les packages qui sont dans le fichier requirements.txt"
-***deactivate*** "pour desactiver votre environnemnt virtuel"
-
-Lancement du script:
-*** python recupBook.py ***
-
-Attendre envion 15-20 minutes
-si une barre de chargement parfait, le script à bien été exécuté
+Wait about 20-30 minutes
+If a loading bar appears,
+the script has been executed
 
