@@ -15,13 +15,20 @@ Quand vous installez python cocher l'option
 
 les 3 options qui sont à la suite sont à réaliser que si vous voulez avoir un environnement virtuel
 
-*** python -m venv env ***
+Si vous n'utilisez pas pycharm
 
+*** python -m venv env *** "Pour installer votre environnement virtuel"
+*** env/scripts/activate *** "pour activez votre environnement virtuel"
+*** pip install -r requirements.txt *** "Pour installez touts les packages qui sont dans le fichier requirements.txt"
+***deactivate*** pour desactiver votre environnement virtuel
 
-*** env/scripts/activate ***
+Si vous utilisez pycharm
 
-
-*** pip install -r requirements.txt ***
+Cliquez en bas à droite de pycharm sur votre language de programmation et appuyez sur add interpretter
+Cliquez sur New environnement et appuyez sur ok
+*** venv/scripts/activate*** "Pour activer votre environnement virtuel"
+*** pip install -r requirements.txt*** "Pour installez touts les packages qui sont dans le fichier requirements.txt"
+***deactivate*** "pour desactiver votre environnemnt virtuel"
 
 Lancement du script:
 *** python recupBook.py ***
