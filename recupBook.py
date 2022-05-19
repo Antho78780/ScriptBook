@@ -26,7 +26,7 @@ image_url = []
 product_description = []
 en_tete = [
     "title", "category", "number_available", "price_including_max", "price_excluding_max", "review_rating",
-    "universal_product_code" "product_page_url", "image_url", "product_description"
+    "universal_product_code", "product_page_url", "image_url", "product_description"
 ]
 
 
